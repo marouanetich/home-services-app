@@ -134,8 +134,6 @@ function Signup() {
     }));
   }
 
-  console.log(lastUserId);
-
   function handleSignup(e) {
     e.preventDefault();
 
@@ -166,55 +164,55 @@ function Signup() {
       method: 'POST',
       body: formData,
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      dispatch({ type: 'RESET' });
+      setErrors(initialErrors);
+      setError('');
+      if (lastUserId) {
+        if (state.role === 'Customer') {
+          fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user_id: lastUserId
+            })
+          })
+          .then(response => {
+            if (!response.ok) {
+              console.error("Error creating customer:", response.statusText);
+              return;
+            }
+            try {
+              return response.json();
+            } catch (error) {
+              console.error("Error parsing response:", error);
+              return;
+            }
+          })
+          .then(data => {
+          })
+          .catch(error => {
+            console.error("Unexpected error:", error);
+          });
+        } else {
+          // Dealing with service provider registration
         }
-        return response.json();
-      })
-      .then(data => {
-        dispatch({ type: 'RESET' });
-        setErrors(initialErrors);
-        setError('');
-        if (lastUserId) {
-          if (state.role === 'Customer') {
-            fetch(`${process.env.REACT_APP_API_BASE_URL}/customers`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                user_id: lastUserId
-              })
-            })
-            .then(response => {
-              if (!response.ok) {
-                console.error("Error creating customer:", response.statusText);
-                return;
-              }
-              try {
-                return response.json();
-              } catch (error) {
-                console.error("Error parsing response:", error);
-                return;
-              }
-            })
-            .then(data => {
-            })
-            .catch(error => {
-              console.error("Unexpected error:", error);
-            });
-          } else {
-            // Dealing with service provider registration
-          }
-          navigate('/signin');
-        }
-      })
-      .catch(err => {
-        setError('Failed to sign up. Please try again.');
-        console.error('Error:', err);
-      });
-  }
+        navigate('/signin');
+      }
+    })
+    .catch(err => {
+      setError('Failed to sign up. Please try again.');
+      console.error('Error:', err);
+    });
+}
 
   return (
     <FormContainer>

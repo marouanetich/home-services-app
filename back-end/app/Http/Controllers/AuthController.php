@@ -21,10 +21,13 @@ class AuthController extends Controller
         ]);
 
         $imagePath = null;
+        
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('images', $imageName, 'public');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $imageName);
+            $imagePath = 'images/' . $imageName;
         }
 
         $user = new User([
@@ -52,7 +55,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
 
-            $imageUrl = $user->image ? asset('storage/' . $user->image) : null;
+            $imageUrl = $user->image ? asset($user->image) : null;
 
             $userData = [
                 'id' => $user->id,
