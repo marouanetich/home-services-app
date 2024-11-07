@@ -8,7 +8,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function getLastUserId() {
-        $user = User::latest()->pluck('id')->first();
+        $user = User::latest('id')->pluck('id')->first();
 
         return response()->json([
             'last_user_id' => $user

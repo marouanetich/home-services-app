@@ -47,7 +47,7 @@ function Signup() {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/users/last-user`)
       .then(response => response.json())
       .then(data => setLastUserId(data.last_user_id + 1));
-  }, []);
+  }, [lastUserId]);
 
   useEffect(() => {
     dispatch({ type: 'SIGN_UP', field: 'role', value: 'Customer' });

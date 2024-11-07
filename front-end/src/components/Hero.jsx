@@ -20,11 +20,11 @@ function Hero() {
     <div className="py-20 text-center">
       <div className="text-[60px] font-semibold leading-tight">Trouver des services et réparations <br />à domicile près de toi</div>
       <p className="text-gray-500 mt-4 mb-6">Découvrez les meilleurs services et réparations à domicile à proximité</p>
-      <div className="max-w-[400px] mx-auto relative">
+      {/* <div className="max-w-[400px] mx-auto relative">
         <input type="text" placeholder="Recherche" className="border-[1px] px-3 pr-9 py-2 rounded-md outline-gray-600 text-sm w-full" />
         <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 cursor-pointer" />
-      </div>
-      <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      </div> */}
+      <div className="mt-20 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {
           Object.keys(categories).length > 0 ?
           categories.categories?.map(category => (
