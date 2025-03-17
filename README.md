@@ -76,21 +76,24 @@ Follow these instructions to set up the project locally.
 3. **Install Composer Dependencies**
    ```bash
    composer install
-4. **Run Database Migrations**
+4. **Set Up Environment Variables**
+   ```bash
+   cp .env.example .env
+5. **Run Database Migrations**
    ```bash
    php artisan migrate
-5. **Seed the Database**
+6. **Seed the Database**
    ```bash
    php artisan db:seed
-6. **Start the Laravel Development Server**
+7. **Start the Laravel Development Server**
    ```bash
    php artisan serve
-7. **Navigate to the Front-End Directory**
+8. **Navigate to the Front-End Directory**
     ```bash
     cd ../front-end
-8. **Install NPM Dependencies**
+9. **Install NPM Dependencies**
     ```bash
     npm install
-9. **Start the React Development Server**
+10. **Start the React Development Server**
     ```bash
     npm start
